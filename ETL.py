@@ -313,7 +313,19 @@ print("VALORES ÚNICOS:", df_base_interna['tipo_de_propriedade'].nunique())
 print("VALORES ÚNICOS E SUAS FREQUÊNCIAS:\n", df_base_interna['tipo_de_propriedade'].value_counts())
 
 # TRATAMENTO DA COLUNA 'latitude'
+# TRATAMENTO DA COLUNA 'latitude' PARA float
 df_base_interna ['latitude'] = df_base_interna ['latitude'].astype(float)
+
+# DIAGNÓSTICO
 print(df_base_interna['latitude'].head())
 print(df_base_interna['latitude'].dtype)
 print("QUANTIDADE DE VALORES NULOS:", df_base_interna['latitude'].isnull().sum())
+
+# TRATAMENTO DA COLUNA 'longitude'
+# TRATAMENTO DA COLUNA 'longitude' PARA float
+df_base_interna ['longitude'] = df_base_interna ['longitude'].astype(float)
+
+# DIAGNÓSTICO
+print(df_base_interna['longitude'].head())
+print(df_base_interna['longitude'].dtype)
+print("QUANTIDADE DE VALORES NULOS:", df_base_interna['longitude'].isnull().sum())
