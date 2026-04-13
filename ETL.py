@@ -40,6 +40,10 @@ df_base_interna['banheiros'] = (
     .astype(float)
 )
 
+# REMOVER COLUNA 'bathrooms_text' APÓS EXTRAÇÃO DE INFORMAÇÃO
+df_base_interna.drop('bathrooms_text', axis=1, inplace=True)
+
+
 # TRATAMENTO DA CULUNA 'bedrooms'
 # RENOMEAR COLUNA 'bedrooms' PARA 'quartos'
 df_base_interna.rename(
