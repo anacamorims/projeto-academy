@@ -1,6 +1,8 @@
 import pandas as pd
 import sqlite3
 
+from pyparsing import col
+
 
 # 1 EXTRAÇÃO
 df_base_interna = pd.read_csv('base_interna.csv')
@@ -283,6 +285,7 @@ import numpy as np
 
 df_base_interna["reviews_log"] = np.log1p(df_base_interna["quantidade_avaliacoes"])
 
+
 # DIAGNÓSTICO
 print(df_base_interna['quantidade_avaliacoes'].head())
 print(df_base_interna['quantidade_avaliacoes'].dtype)
@@ -300,17 +303,90 @@ df_base_interna.rename(
     inplace=True
 )
 
-print(df_base_interna['tipo_de_propriedade'].value_counts())
-print("CATEGORIAS:", df_base_interna['tipo_de_propriedade'].unique())
+# DEFINIR A COLUNA DE PROPRIEDADE PARA TRATAMENTO
+coluna_propriedade = "tipo_de_propriedade"
 
-print(df_base_interna['tipo_de_propriedade'].head())
-print(df_base_interna['tipo_de_propriedade'].dtype)
-print(df_base_interna['tipo_de_propriedade'].info())
-print(df_base_interna['tipo_de_propriedade'].describe())
-print("QUANTIDADE DE VALORES NULOS:", df_base_interna['tipo_de_propriedade'].isnull().sum())
-print("CATEGORIAS:", df_base_interna['tipo_de_propriedade'].unique())
-print("VALORES ÚNICOS:", df_base_interna['tipo_de_propriedade'].nunique())
-print("VALORES ÚNICOS E SUAS FREQUÊNCIAS:\n", df_base_interna['tipo_de_propriedade'].value_counts())
+# NORMALIZAÇÃO
+df_base_interna[coluna_propriedade] = (
+    df_base_interna[coluna_propriedade]
+    .fillna("outros")
+    .astype(str)
+    .str.strip()
+    .str.lower()
+)
+
+# MAPA DE AGRUPAMENTO (REGRA DE NEGÓCIO)
+mapa_agrupamento = {
+
+    # ESPAÇO INTEIRO – RESIDENCIAL
+    "entire home": "espaco_inteiro_residencial",
+    "entire condo": "espaco_inteiro_residencial",
+    "entire rental unit": "espaco_inteiro_residencial",
+    "entire guesthouse": "espaco_inteiro_residencial",
+    "entire guest suite": "espaco_inteiro_residencial",
+    "entire townhouse": "espaco_inteiro_residencial",
+    "entire cottage": "espaco_inteiro_residencial",
+    "entire bungalow": "espaco_inteiro_residencial",
+    "entire villa": "espaco_inteiro_residencial",
+    "entire vacation home": "espaco_inteiro_residencial",
+    "entire serviced apartment": "espaco_inteiro_residencial",
+    "entire loft": "espaco_inteiro_residencial",
+    "entire chalet": "espaco_inteiro_residencial",
+    "entire place": "espaco_inteiro_residencial",
+    "tiny home": "espaco_inteiro_residencial",
+
+    # QUARTO PRIVATIVO – RESIDENCIAL
+    "private room": "quarto_privativo_residencial",
+    "private room in home": "quarto_privativo_residencial",
+    "private room in condo": "quarto_privativo_residencial",
+    "private room in rental unit": "quarto_privativo_residencial",
+    "private room in townhouse": "quarto_privativo_residencial",
+    "private room in villa": "quarto_privativo_residencial",
+    "private room in cabin": "quarto_privativo_residencial",
+    "private room in guest suite": "quarto_privativo_residencial",
+    "private room in farm stay": "quarto_privativo_residencial",
+    "private room in casa particular": "quarto_privativo_residencial",
+
+    # HOSPEDAGEM COMERCIAL
+    "room in hotel": "hospedagem_comercial",
+    "room in boutique hotel": "hospedagem_comercial",
+    "private room in bed and breakfast": "hospedagem_comercial",
+    "private room in hostel": "hospedagem_comercial",
+    "shared room in hostel": "hospedagem_comercial",
+
+    # OUTROS 
+    "entire cabin": "outros",
+    "treehouse": "outros",
+    "farm stay": "outros",
+    "barn": "outros",
+    "hut": "outros",
+    "earthen home": "outros",
+    "dome": "outros",
+    "yurt": "outros",
+    "windmill": "outros",
+    "campsite": "outros",
+    "tent": "outros",
+    "camper/rv": "outros",
+    "boat": "outros",
+    "train": "outros",
+}
+
+# 3. APLICAR AGRUPAMENTO
+
+df_base_interna["tipo_de_propriedade_grupo"] = (
+    df_base_interna[coluna_propriedade]
+    .map(mapa_agrupamento)
+    .fillna("outros")
+)
+
+# ----------------------------
+# 4. PRINTS (SÓ O QUE VOCÊ PEDIU)
+# ----------------------------
+print("\n CATEGORIAS FINAIS (6 + OUTROS):")
+print(df_base_interna["tipo_de_propriedade_grupo"].value_counts())
+print("\n LISTA DE CATEGORIAS GERADAS:")
+print(df_base_interna["tipo_de_propriedade_grupo"].unique())
+
 
 # TRATAMENTO DA COLUNA 'latitude'
 # TRATAMENTO DA COLUNA 'latitude' PARA float
