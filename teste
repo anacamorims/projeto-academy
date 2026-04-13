@@ -1,0 +1,12 @@
+# 2. ANÁLISE EXPLORATÓRIA
+print(df_base_interna.head())
+print(df_base_interna.info())
+print(df_base_interna.describe())
+print(df_base_interna.isnull().sum())
+
+
+# 3.1 ANALISE EXPLORATÓRIA APÓS SELEÇÃO DE COLUNAS
+print(df_base_interna.head())
+print(df_base_interna.info())
+print(df_base_interna.describe())
+print(df_base_interna.isnull().sum())
