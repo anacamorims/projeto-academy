@@ -293,3 +293,24 @@ print("TOTAL DE VALORES NULOS:", df_base_interna['quantidade_avaliacoes'].isnull
 print("original -> min de quantidade_avaliacoes:", df_base_interna['quantidade_avaliacoes'].min(), "max de quantidade_avaliacoes:", df_base_interna['quantidade_avaliacoes'].max())
 print("log -> min de reviews_log:", df_base_interna['reviews_log'].min(), "max de reviews_log:", df_base_interna['reviews_log'].max())
 
+# TRATAMENTO DA COLUNA 'property_type'
+# RENOMEAR COLUNA 'property_type' PARA 'tipo_de_propriedade'
+df_base_interna.rename(
+    columns={'property_type': 'tipo_de_propriedade'},
+    inplace=True
+)
+
+print(df_base_interna['tipo_de_propriedade'].value_counts())
+print("CATEGORIAS:", df_base_interna['tipo_de_propriedade'].unique())
+
+print(df_base_interna['tipo_de_propriedade'].head())
+print(df_base_interna['tipo_de_propriedade'].dtype)
+print(df_base_interna['tipo_de_propriedade'].info())
+print(df_base_interna['tipo_de_propriedade'].describe())
+print("QUANTIDADE DE VALORES NULOS:", df_base_interna['tipo_de_propriedade'].isnull().sum())
+print("CATEGORIAS:", df_base_interna['tipo_de_propriedade'].unique())
+print("VALORES ÚNICOS:", df_base_interna['tipo_de_propriedade'].nunique())
+print("VALORES ÚNICOS E SUAS FREQUÊNCIAS:\n", df_base_interna['tipo_de_propriedade'].value_counts())
+
+# TRATAMENTO DA COLUNA 'latitude'
+

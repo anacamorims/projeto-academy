@@ -10,3 +10,8 @@ print(df_base_interna.head())
 print(df_base_interna.info())
 print(df_base_interna.describe())
 print(df_base_interna.isnull().sum())
+
+# VER VALORES EM UMA COLUNA
+print("CATEGORIAS:", df_base_interna['tipo_de_propriedade'].unique())
+print("VALORES ÚNICOS:", df_base_interna['tipo_de_propriedade'].nunique())
+print("VALORES ÚNICOS E SUAS FREQUÊNCIAS:\n", df_base_interna['tipo_de_propriedade'].value_counts())
