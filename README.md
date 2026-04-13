@@ -1,2 +1,2 @@
 Projeto Academy - Grupo 1
-Linha 2 - adri conseguiu subir algo para o repositorio remoto. ( first step concluido ).
+Código para tratar os dados da base e renomear as colunas para português.
