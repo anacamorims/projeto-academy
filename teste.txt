@@ -124,6 +124,8 @@ print("min de camas:", df_base_interna['camas'].min(), "max de camas:", df_base_
 print(df_base_interna.filter(like='tipo_quarto').head())
 print( "QUANTIDADE DE VALORES NULOS:", df_base_interna.filter(like='tipo_quarto').isnull().sum())
 #---------------------------------------------------
+
+
 # TRATAMENTO DE VALORES NULOS COLUNA 'nota_avaliacao' - SUBSTITUIR POR MEDIANA
 df_base_interna['nota_avaliacao'] = (
     df_base_interna['nota_avaliacao']
@@ -220,6 +222,23 @@ print("\n CATEGORIAS FINAIS:")
 print(df_base_interna["tipo_de_propriedade_grupo"].value_counts())
 print("\n LISTA DE CATEGORIAS GERADAS:")
 print(df_base_interna["tipo_de_propriedade_grupo"].unique())
+
+#COMPARAR O Label Encoder - CRIAR NOVA COLUNA
+#PS: O + 1 É PARA ALTERAR O INÍCIO EM INDICIE 0
+df_base_interna ["tipo_de_propriedade_grupo_encode"] = le.fit_transform(df_base_interna ["tipo_de_propriedade_grupo"]) + 1
+
+
+#Como o Label Encoder categorizou os tipos de propriedade
+    1    espaco_inteiro_residencial
+    2          hospedagem_comercial
+    3                        outros
+    4  quarto_privativo_residencial
+
+#COMO SELECIONAR OCORRENCIAS UNICAS EM SQL - CASO DA COLUNA tipo_de_propriedade_grupo
+#PS: TAMBÉM ESTÁ ORDENADA DO MENOR PARA O MAIOR
+df_sqlite = pd.read_sql('SELECT DISTINCT tipo_de_propriedade_grupo_encode, tipo_de_propriedade_grupo FROM base_tratada ORDER BY tipo_de_propriedade_grupo_encode ASC', conexao)
+
+
 #----------------------------------------------------
 
 # DIAGNÓSTICO COLUNA LATITUDE

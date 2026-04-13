@@ -1,9 +1,12 @@
 import pandas as pd
 import sqlite3
+from sklearn.preprocessing import LabelEncoder
 
 # 1 EXTRAÇÃO
 df_base_interna = pd.read_csv('base_interna.csv')
 
+#Inicialização do LabelEncoder
+le= LabelEncoder()
 
 # 2. TRANSFORMAÇÃO - SELEÇÃO DE COLUNAS para TRATAMENTO (Limpeza Bruta)
 colunas_tratamento = ["price","accommodates","bedrooms", "beds", "bathrooms_text", 
@@ -170,6 +173,9 @@ df_base_interna["tipo_de_propriedade_grupo"] = (
     .map(mapa_agrupamento)
     .fillna("outros")
 )
+
+# CRIAR VARIÁVEIS DO LABEL ENCODER PARA 'tipo_de_propriedade_grupo'
+df_base_interna ["tipo_de_propriedade_grupo"] = le.fit_transform(df_base_interna ["tipo_de_propriedade_grupo"]) + 1
 
 # TRATAMENTO DA COLUNA 'latitude'
 # TRATAMENTO DA COLUNA 'latitude' PARA float
