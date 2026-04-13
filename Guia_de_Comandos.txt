@@ -1,4 +1,4 @@
-""""
+""""  !APAGAR ESTE ARQUIVO ANTES DE FAZER PR PARA MAIN!
 # DIAGNÓSTICO COLUNA 'preco'
 print(df_base_interna['preco'].head())
 print(df_base_interna['preco'].dtype)
