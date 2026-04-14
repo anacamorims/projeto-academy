@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 # 1. EXTRAÇÃO
-df_base_ipca = pd.read_csv ('base_ipca.csv')
+df_base_ipca = pd.read_csv ('bases/base_ipca.csv')
 
 # print (df_base_ipca.head())
 # print (df_base_ipca.info ())

@@ -8,5 +8,3 @@ ipca_final,
 on = ["ano", "mes"],
 how = "left"
 )
-
-print (base_integrada.dtypes)
