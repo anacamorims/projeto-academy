@@ -186,19 +186,3 @@ df_base_interna ['latitude'] = df_base_interna ['latitude'].astype(float)
 # TRATAMENTO DA COLUNA 'longitude'
 # TRATAMENTO DA COLUNA 'longitude' PARA float
 df_base_interna ['longitude'] = df_base_interna ['longitude'].astype(float)
-
-# 3. CARGA - EXPORTAR PARA BANCO DE DADOS SQLITE
-# CONECTAR AO BANCO DE DADOS (OU CRIAR SE NÃO EXISTIR)
-conexao = sqlite3.connect('base_tratada.db')
-
-# EXPORTAR O DATAFRAME PARA O BANCO DE DADOS
-df_base_interna.to_sql('base_tratada', conexao, if_exists='replace', index=False)
-
-# Ler a tabela do SQLite
-df_sqlite = pd.read_sql('SELECT * FROM base_tratada', conexao)
-
-# Printar as primeiras linhas
-print(df_sqlite)
-
-# FECHAR A CONEXÃO
-conexao.close()
