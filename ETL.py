@@ -14,6 +14,8 @@ colunas_tratamento = ["price","accommodates","bedrooms", "beds", "bathrooms_text
 "latitude", "longitude"]
 df_base_interna = df_base_interna[colunas_tratamento]
 
+df_base_interna ["ano"] = 2025
+df_base_interna ["mes"] = 9
 
 # TRATAMENTO DA COLUNA 'price'
 # RENOMEAR COLUNA 'price' PARA 'preco'
