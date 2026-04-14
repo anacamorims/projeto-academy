@@ -3,7 +3,7 @@ import sqlite3
 from sklearn.preprocessing import LabelEncoder
 
 # 1 EXTRAÇÃO
-df_base_interna = pd.read_csv('base_interna.csv')
+df_base_interna = pd.read_csv('bases/base_interna.csv')
 
 #Inicialização do LabelEncoder
 le= LabelEncoder()
