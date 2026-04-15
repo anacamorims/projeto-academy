@@ -10,8 +10,8 @@ le= LabelEncoder()
 
 # 2. TRANSFORMAÇÃO - SELEÇÃO DE COLUNAS para TRATAMENTO (Limpeza Bruta)
 colunas_tratamento = ["price","accommodates","bedrooms", "beds", "bathrooms_text", 
-"room_type", "review_scores_rating","minimum_nights", "number_of_reviews", "property_type", 
-"latitude", "longitude"]
+"room_type", "review_scores_rating","minimum_nights", "number_of_reviews", "property_type",
+"latitude", "longitude", "neighbourhood_cleansed"]
 df_base_interna = df_base_interna[colunas_tratamento]
 
 df_base_interna ["ano"] = 2025
@@ -186,3 +186,10 @@ df_base_interna ['latitude'] = df_base_interna ['latitude'].astype(float)
 # TRATAMENTO DA COLUNA 'longitude'
 # TRATAMENTO DA COLUNA 'longitude' PARA float
 df_base_interna ['longitude'] = df_base_interna ['longitude'].astype(float)
+
+# TRATAMENTO DA COLUNA "neighbourhood_cleansed"
+# RENOMEAR COLUNA 'neighbourhood_cleansed' PARA 'bairro'
+df_base_interna.rename(
+    columns={'neighbourhood_cleansed': 'bairro'},
+    inplace=True
+)
