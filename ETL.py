@@ -10,10 +10,12 @@ le= LabelEncoder()
 
 # 2. TRANSFORMAÇÃO - SELEÇÃO DE COLUNAS para TRATAMENTO (Limpeza Bruta)
 colunas_tratamento = ["price","accommodates","bedrooms", "beds", "bathrooms_text", 
-"room_type", "review_scores_rating","minimum_nights", "number_of_reviews", "property_type", 
-"latitude", "longitude"]
+"room_type", "review_scores_rating","minimum_nights", "number_of_reviews", "property_type",
+"latitude", "longitude", "neighbourhood_cleansed"]
 df_base_interna = df_base_interna[colunas_tratamento]
 
+df_base_interna ["ano"] = 2025
+df_base_interna ["mes"] = 9
 
 # TRATAMENTO DA COLUNA 'price'
 # RENOMEAR COLUNA 'price' PARA 'preco'
@@ -185,18 +187,9 @@ df_base_interna ['latitude'] = df_base_interna ['latitude'].astype(float)
 # TRATAMENTO DA COLUNA 'longitude' PARA float
 df_base_interna ['longitude'] = df_base_interna ['longitude'].astype(float)
 
-# 3. CARGA - EXPORTAR PARA BANCO DE DADOS SQLITE
-# CONECTAR AO BANCO DE DADOS (OU CRIAR SE NÃO EXISTIR)
-conexao = sqlite3.connect('base_tratada.db')
-
-# EXPORTAR O DATAFRAME PARA O BANCO DE DADOS
-df_base_interna.to_sql('base_tratada', conexao, if_exists='replace', index=False)
-
-# Ler a tabela do SQLite
-df_sqlite = pd.read_sql('SELECT * FROM base_tratada', conexao)
-
-# Printar as primeiras linhas
-print(df_sqlite)
-
-# FECHAR A CONEXÃO
-conexao.close()
+# TRATAMENTO DA COLUNA "neighbourhood_cleansed"
+# RENOMEAR COLUNA 'neighbourhood_cleansed' PARA 'bairro'
+df_base_interna.rename(
+    columns={'neighbourhood_cleansed': 'bairro'},
+    inplace=True
+)
