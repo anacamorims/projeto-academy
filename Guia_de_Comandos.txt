@@ -237,6 +237,7 @@ df_base_interna ["tipo_de_propriedade_grupo_encode"] = le.fit_transform(df_base_
 #COMO SELECIONAR OCORRENCIAS UNICAS EM SQL - CASO DA COLUNA tipo_de_propriedade_grupo
 #PS: TAMBÉM ESTÁ ORDENADA DO MENOR PARA O MAIOR
 df_sqlite = pd.read_sql('SELECT DISTINCT tipo_de_propriedade_grupo_encode, tipo_de_propriedade_grupo FROM base_tratada ORDER BY tipo_de_propriedade_grupo_encode ASC', conexao)
+print(df_base_interna[["bairro", "bairro_encode"]]) - print para selecionar múltiplas COLUNAS
 
 
 #----------------------------------------------------

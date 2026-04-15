@@ -193,3 +193,5 @@ df_base_interna.rename(
     columns={'neighbourhood_cleansed': 'bairro'},
     inplace=True
 )
+# CRIAR VARIÁVEIS DO LABEL ENCODER 'bairro_grupo'
+df_base_interna ["bairro_encode"] = le.fit_transform(df_base_interna ["bairro"]) + 1
