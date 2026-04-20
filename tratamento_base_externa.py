@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 
 # 1. EXTRAÇÃO
 df_base_ipca = pd.read_csv ('bases/base_ipca.csv')
@@ -46,7 +45,3 @@ ipca_final = pd.DataFrame({
 })
 
 ipca_final["ano_mes"] = pd.to_datetime(ipca_final["ano_mes"], format="%Y-%m")
-
-print(ipca_final)
-print("\nTipos das colunas:")
-print(ipca_final.dtypes)
