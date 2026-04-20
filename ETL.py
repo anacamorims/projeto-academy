@@ -26,6 +26,7 @@ df_base_interna.rename(
     inplace=True
 )
 df_base_interna ['preco'] = df_base_interna ['preco'].str.replace('$', '', regex=False).str.replace(',', '', regex=False)
+# df_base_interna [df_base_interna ['preco'].notnull()]
 
 # TRATAMENTO DA COLUNA 'preco' PARA float
 df_base_interna ['preco'] = df_base_interna ['preco'].astype(float)
@@ -77,17 +78,21 @@ df_base_interna['tipo_de_quarto'] = (
     .str.strip()
     .str.lower()
 )
+
+#LAbel encoder para 'tipo_de_quarto'
+#df_base_interna ["tipo_de_quarto_encode"] = le_tipo_quarto.fit_transform(df_base_interna ["tipo_de_quarto"]) + 1
+
 # # TRATAR VALORES NULOS - SUBSTITUIR POR 'moda'
 # df_base_interna['tipo_de_quarto'] = (
 #     df_base_interna['tipo_de_quarto'].fillna(df_base_interna['tipo_de_quarto'].mode()[0])
 # )
 
-df_base_interna = pd.get_dummies(
-    df_base_interna,
-    columns=['tipo_de_quarto'],
-    prefix='tipo_quarto',
-    drop_first=False
-)
+# df_base_interna = pd.get_dummies(
+#     df_base_interna,
+#     columns=['tipo_de_quarto'],
+#     prefix='tipo_quarto',
+#     drop_first=False
+# )
 
 # TRATAMENTO DA COLUNA 'review_scores_rating'
 # RENOMEAR COLUNA 'review_scores_rating' PARA 'nota_avaliacao'
