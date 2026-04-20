@@ -5,8 +5,10 @@ from sklearn.preprocessing import LabelEncoder
 # 1 EXTRAÇÃO
 df_base_interna = pd.read_csv('bases/base_interna.csv')
 
-#Inicialização do LabelEncoder
-le= LabelEncoder()
+#Inicialização do LabelEncoder por coluna
+le_bairro= LabelEncoder();
+le_tipo_quarto= LabelEncoder();
+le_tipo_propriedade= LabelEncoder();
 
 # 2. TRANSFORMAÇÃO - SELEÇÃO DE COLUNAS para TRATAMENTO (Limpeza Bruta)
 colunas_tratamento = ["price","accommodates","bedrooms", "beds", "bathrooms_text", 
@@ -69,11 +71,16 @@ df_base_interna.rename(
     columns={'room_type': 'tipo_de_quarto'},
     inplace=True
 )
-
-# TRATAR VALORES NULOS - SUBSTITUIR POR 'moda'
+#Normalizar tipo_de_quarto - todos valores minúsculos
 df_base_interna['tipo_de_quarto'] = (
-    df_base_interna['tipo_de_quarto'].fillna(df_base_interna['tipo_de_quarto'].mode()[0])
+    df_base_interna['tipo_de_quarto']
+    .str.strip()
+    .str.lower()
 )
+# # TRATAR VALORES NULOS - SUBSTITUIR POR 'moda'
+# df_base_interna['tipo_de_quarto'] = (
+#     df_base_interna['tipo_de_quarto'].fillna(df_base_interna['tipo_de_quarto'].mode()[0])
+# )
 
 df_base_interna = pd.get_dummies(
     df_base_interna,
@@ -177,7 +184,7 @@ df_base_interna["tipo_de_propriedade_grupo"] = (
 )
 
 # CRIAR VARIÁVEIS DO LABEL ENCODER PARA 'tipo_de_propriedade_grupo'
-df_base_interna ["tipo_de_propriedade_grupo"] = le.fit_transform(df_base_interna ["tipo_de_propriedade_grupo"]) + 1
+df_base_interna ["tipo_de_propriedade_grupo"] = le_tipo_propriedade.fit_transform(df_base_interna ["tipo_de_propriedade_grupo"]) + 1
 
 # TRATAMENTO DA COLUNA 'latitude'
 # TRATAMENTO DA COLUNA 'latitude' PARA float
@@ -194,4 +201,4 @@ df_base_interna.rename(
     inplace=True
 )
 # CRIAR VARIÁVEIS DO LABEL ENCODER 'bairro_grupo'
-df_base_interna ["bairro_encode"] = le.fit_transform(df_base_interna ["bairro"]) + 1
+df_base_interna ["bairro_encode"] = le_bairro.fit_transform(df_base_interna ["bairro"]) + 1
