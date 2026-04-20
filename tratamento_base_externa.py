@@ -45,7 +45,3 @@ ipca_final = pd.DataFrame({
 })
 
 ipca_final["ano_mes"] = pd.to_datetime(ipca_final["ano_mes"], format="%Y-%m")
-
-print(ipca_final)
-print("\nTipos das colunas:")
-print(ipca_final.dtypes)

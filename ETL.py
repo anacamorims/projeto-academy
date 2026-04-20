@@ -26,7 +26,7 @@ df_base_interna.rename(
     inplace=True
 )
 df_base_interna ['preco'] = df_base_interna ['preco'].str.replace('$', '', regex=False).str.replace(',', '', regex=False)
-# df_base_interna [df_base_interna ['preco'].notnull()]
+
 
 # TRATAMENTO DA COLUNA 'preco' PARA float
 df_base_interna ['preco'] = df_base_interna ['preco'].astype(float)
