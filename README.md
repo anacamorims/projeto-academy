@@ -4,12 +4,21 @@ Código para tratar os dados da base.
 Guia de instalação
 pip install pandas
 pip install scikit-learn
+pip install matplotlib
+pip install seaborn
 
 Como o Label Encoder categorizou os tipos de propriedade
     1    espaco_inteiro_residencial
     2          hospedagem_comercial
     3                        outros
     4  quarto_privativo_residencial
+
+Como o Label Encoder categorizou os tipos de quarto
+
+    1       entire home/apt 
+    2       hotel room                       
+    3       private room                      
+    4       shared room                                     
 
 Como o Label Encoder categorizou os bairros
     1	Abolição
