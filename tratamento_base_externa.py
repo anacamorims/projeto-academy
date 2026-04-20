@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 
 # 1. EXTRAÇÃO
 df_base_ipca = pd.read_csv ('bases/base_ipca.csv')
