@@ -4,6 +4,8 @@ Código para tratar os dados da base.
 Guia de instalação
 pip install pandas
 pip install scikit-learn
+pip install matplotlib
+pip install seaborn
 
 Como o Label Encoder categorizou os tipos de propriedade
     1    espaco_inteiro_residencial
