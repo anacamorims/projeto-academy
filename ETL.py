@@ -133,8 +133,8 @@ df_base_interna_dummies = pd.get_dummies(
     drop_first=False
 )
 
-#juntar as colunas dummies com a base original
-df_base_interna = pd.concat([df_base_interna, df_base_interna_dummies])
+#juntar as colunas dummies com a base original (horizontalmente)
+df_base_interna = pd.concat([df_base_interna, df_base_interna_dummies], axis=1)
 
 # TRATAMENTO DA COLUNA 'quantidade_avaliacoes'
 # GARANTIR CONVERSÃO PARA NÚMERO
