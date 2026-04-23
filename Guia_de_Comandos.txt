@@ -119,6 +119,11 @@ print("QUANTIDADE DE VALORES NULOS:", df_base_interna['camas'].isnull().sum())
 print("min de camas:", df_base_interna['camas'].min(), "max de camas:", df_base_interna['camas'].max())
 #---------------------------------------------------
 
+# # TRATAR VALORES NULOS - SUBSTITUIR POR 'moda'
+# df_base_interna['tipo_de_quarto'] = (
+#     df_base_interna['tipo_de_quarto'].fillna(df_base_interna['tipo_de_quarto'].mode()[0])
+# )
+
 # CONFERIR O RESULTADO COLUNA 'tipo_de_quarto'
 #PS: DEPOIS DO TRATAMENTO DE VALORES NULOS E TRANSFORMAÇÃO EM VARIÁVEIS DUMMY
 print(df_base_interna.filter(like='tipo_quarto').head())
@@ -182,6 +187,7 @@ print(
 #---------------------------------------------------
 
 #TRATAMENTO SUGERIDO DA COLUNA 'quantidade_avaliacoes'
+
 # LOG TRANSFORM - CRIAR COLUNA 'reviews_log' COM O LOGARITMO DA QUANTIDADE DE AVALIAÇÕES
 import numpy as np
 
@@ -256,13 +262,6 @@ print("QUANTIDADE DE VALORES NULOS:", df_base_interna['longitude'].isnull().sum(
 
 #---------------------------------------------------
 # ANÁLISE EXPLORATÓRIA
-print(df_base_interna.head())
-print(df_base_interna.info())
-print(df_base_interna.describe())
-print(df_base_interna.isnull().sum())
-
-
-# ANÁLISE EXPLORATÓRIA APÓS SELEÇÃO DE COLUNAS
 print(df_base_interna.head())
 print(df_base_interna.info())
 print(df_base_interna.describe())
