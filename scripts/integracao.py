@@ -1,8 +1,8 @@
 # INTEGRAÇÃO
 import pandas as pd
 import sqlite3
-from scripts.ETL import df_base_interna
-from scripts.tratamento_base_externa import ipca_final
+from ETL import df_base_interna
+from tratamento_base_externa import ipca_final
 
 base_integrada = df_base_interna.merge(
 ipca_final,
