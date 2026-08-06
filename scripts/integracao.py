@@ -20,8 +20,5 @@ base_integrada.to_sql('base_tratada', conexao, if_exists='replace', index=False)
 # Ler a tabela do SQLite
 df_sqlite = pd.read_sql('SELECT * FROM base_tratada', conexao)
 
-# Printar as primeiras linhas
-print(df_sqlite)
-
 # FECHAR A CONEXÃO
 conexao.close()
